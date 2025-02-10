@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(...um poema, um café...) volume 3</title>
+    <style>
+        /* Importando a fonte 'Special Elite' do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+        /* Estilos gerais */
+        body {
+            font-family: 'Special Elite', 'Courier New', Courier, monospace;
+            background-color: #f9f9f9;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='20' height='20' fill='%23f9f9f9'/%3E%3Cpath d='M0 0L20 20M20 0L0 20' stroke='%23e0e0e0' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* Container principal */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 25px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        /* Título principal */
+        .title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        /* Capa do livro */
+        .book-cover {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .book-cover img {
+            width: 250px; /* Aumento do tamanho da capa */
+            height: auto;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+            display: block;
+            margin: auto;
+        }
+
+        .book-cover img:hover {
+            transform: scale(1.08);
+        }
+
+        /* Modal para exibição da capa expandida */
+        .modal {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            opacity: 1;
+            display: flex;
+        }
+
+        .modal-content {
+            width: auto;
+            height: auto;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Notas do autor */
+        .author-notes {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #ccc;
+        }
+
+        .author-notes-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .author-notes-content {
+            text-align: justify;
+            font-size: 1.1em;
+        }
+
+        /* Estilo dos poemas */
+        .poem {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .poem-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: capitalize;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .poem-author {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #555555;
+        }
+
+        .poem-content {
+            white-space: pre-wrap;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 1.1em;
+            padding-left: 15px;
+            border-left: 3px solid #ccc;
+        }
+
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777777;
+            margin-top: 50px;
+            border-top: 1px solid #dddddd;
+            padding-top: 15px;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">(...um poema, um café...)<br>volume 3</div>
+
+        <!-- Capa do Livro -->
+        <div class="book-cover">
+            <img id="bookImage" src="https://i.ibb.co/mVsqsyh7/um-poema-um-caf-volume-3.png" alt="Capa do Livro">
+        </div>
+
+        <!-- Modal para exibir a capa expandida -->
+        <div id="imageModal" class="modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImg">
+        </div>
+
+        <!-- Notas do Autor -->
+        <div class="author-notes">
+            <div class="author-notes-title">Notas do Autor</div>
+            <div class="author-notes-content">No terceiro volume, a poesia atinge um novo estado de maturação. Se antes havia o mergulho inquieto nas águas turbulentas da emoção, agora encontramos um ponto de equilíbrio entre acidez, crueza e sofisticação. Aqui, a palavra não apenas rasga, mas também costura. A escrita, antes movida pela urgência e pelo ímpeto, agora se reinventa em camadas, em respiros, em silêncios que dizem tanto quanto os versos.
+
+                Este livro é uma metamorfose — de sentimentos, de temas, de posturas. Os poemas transitam entre a entrega visceral e a contemplação cuidadosa, entre a fúria e a delicadeza, entre o caos e a harmonia. Há um amadurecimento na dor e na beleza, um olhar mais atento ao detalhe, um afeto que se traduz em imagens precisas, em versos que dançam entre o cru e o elaborado.
+                
+                Se no início a poesia era um café forte e imediato, agora é um gole demorado, um sabor que se revela aos poucos. Cada poema é um reflexo desse caminho, dessa transformação que não se encerra, mas segue pulsando, em constante ebulição.</div>
+            <br>            
+            <div class="author-notes-content">Todos os poemas foram escritos predominantemente entre 2004 e 2010.</div>
+        </div>
+
+       <!-- Poema 1 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Vazio</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        O que escrever,<br>
+        Quando não há nada a ser dito?<br>
+        E se o nada for, na verdade, um amontoado<br>
+        De ideias tortas, mal esculpidas,<br>
+        Pensamentos dispersos que insistem em existir?<br><br>
+
+        Muita coisa se discute no palco do cotidiano,<br>
+        Mas tudo já foi dito, e no que será dito<br>
+        Nada mais será que um eco cansado<br>
+        De palavras gastas pelo tempo.<br><br>
+
+        O que pensar, afinal, do vazio?<br>
+        Ele é tudo o que nunca foi pensado,<br>
+        Um ensaio prematuro sobre o indizível,<br>
+        Linhas trêmulas sobre fatos distorcidos ou não vividos,<br>
+        Numa falta sufocante do que dizer ou silenciar.<br><br>
+
+        O fim do começo — o começo do fim.<br>
+        Do falso escritor, do poeta inacabado,<br>
+        Do louco febril que, sem rumo,<br>
+        Brinca com palavras e as espalha ao vento,<br>
+        Embaralhando ideias abstratas com verdades vivenciadas.<br><br>
+
+        Diálogos sem conclusão,<br>
+        Texto sem nexo, afeto fingido...<br>
+        Nada se encaixa, e ainda assim,<br>
+        A mente segue seu curso caótico.<br><br>
+
+        Na caixa craniana repousa o saber,<br>
+        Mas na caixa da existência,<br>
+        Apenas o desprazer de uma introdução inacabada,<br>
+        De um primeiro ato sem aplausos.<br><br>
+
+        Socorro! Estão matando a língua portuguesa,<br>
+        Estão esfarelando a métrica,<br>
+        Demolindo a lógica, invertendo verdades e sentimentos,<br>
+        Inventando inverdades que se vestem de fato.<br>
+        Socorro! A vida virou um livro sem roteiro com ideias distorcidas.
+    </div>
+</div>
+
+<!-- Poema 2 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">O Momento</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Momento — Movimento de palavras em busca de você,<br>
+        Reflexão profunda entre desejo e ausência.<br>
+        Na ânsia de te ver, esqueço de mim,<br>
+        Perco-me em ruas sem nome,<br>
+        Procuro em vão um abraço que se distancia.<br><br>
+
+        Mas quando se ama, o impossível é só um detalhe,<br>
+        Pelo menos aos meus olhos.<br>
+        Vivo o momento, sofro o momento,<br>
+        Não confio mais em mim.<br><br>
+
+        Fui traído pelos próprios sentimentos,<br>
+        Entreguei-me ao que parecia certo,<br>
+        Mas a certeza é sempre um engano à espreita.<br><br>
+
+        Não há segredos —<br>
+        Todos foram revelados,<br>
+        E no silêncio agora grita o meu desespero.<br>
+        A solidão, antes sombra, tornou-se morada.<br><br>
+
+        O momento pesa, eterno na dor,<br>
+        Como se nunca fosse passar...<br>
+        Mas passa.<br>
+        E ao final, a escuridão nos recebe de novo.<br><br>
+
+        Sei que nunca serei compreendido por inteiro,<br>
+        Nem mesmo por mim.<br>
+        O presente talvez tenha chegado tarde demais,<br>
+        E a vida já não é o que um dia foi.<br><br>
+
+        Resta-me apenas este instante inoportuno,<br>
+        Onde brigo e converso comigo,<br>
+        Só para concluir que, depois de tudo,<br>
+        Ainda sou um enigma sem tradução.<br><br>
+
+        Estou em todas as direções,<br>
+        Sou peça de um jogo que não domino,<br>
+        Movido por regras que não escolhi,<br>
+        Onde cada passo parece vigiado.<br><br>
+
+        Ouço mais do que falo,<br>
+        E, no fundo, acredito:<br>
+        O mundo depende apenas de um gesto seu.<br>
+        Preciso reencontrar meus caminhos,<br>
+        Antes que o momento venha me devorar.
+    </div>
+</div>
+
+<!-- Poema 3 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Revolucional</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Quero diante do espelho do tempo me olhar,<br>
+        Despido das superfícies que me circundam,<br>
+        Analisando quem sou,<br>
+        Sem adornos, adereços ou fantasias.<br><br>
+
+        Quero pisar no chão frio da consciência,<br>
+        Desmascarando o eu-lírico em meus pensamentos,<br>
+        Lavando minha alma nas águas tépidas da razão,<br>
+        Descobrindo quem habita em mim,<br>
+        Sendo, então, dono dos meus sentimentos pela primeira vez.<br><br>
+
+        Transpondo barreiras, quebrando costumes,<br>
+        Desafiando crenças, transcorrendo limites,<br>
+        Em busca da verdade ocultada,<br>
+        Agora revelada,<br>
+        Existente em mim.
+    </div>
+</div>
+
+<!-- Poema 4 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Carpe Diem</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Faça valer, transforme o instante em eternidade,<br>
+        Permita que as coisas boas floresçam sem medo.<br>
+        Não se aprisione em um único segundo,<br>
+        Ele pode te matar!<br><br>
+
+        Não curve a alma ao que pouco merece,<br>
+        Há batalhas que não valem nem suor, nem lágrimas.<br>
+        Há pesos que não são dignos de sua força.<br>
+        Cada gota de esforço deve ser sagrada,<br>
+        Cada tristeza, um espelho de sua essência.<br><br>
+
+        Pois em cada pranto há poesia,<br>
+        Em cada dor, um eco da sua verdade.<br>
+        Sua voz não se limita ao som,<br>
+        Seu grito pode ser o silêncio que estremece o mundo.<br><br>
+
+        Vida! Exale o perfume da felicidade,<br>
+        Sinta o arrepio de existir sem restrições.<br>
+        O tempo não se refaz, não há retorno,<br>
+        Então crie suas alegrias enquanto há felicidade.<br><br>
+
+        Não permita que sombras alheias apaguem seu brilho,<br>
+        Valorize o que é seu, alcance o que lhe pertence,<br>
+        Cerque-se de energia que te impulsiona,<br>
+        Recuse-se a ser refém do que não te contém.<br><br>
+
+        Nenhum momento será absolutamente perfeito,<br>
+        A vida é feita do equilíbrio entre perdas e conquistas.<br>
+        Por isso, esteja atento a cada passo,<br>
+        Pois o hoje pode não ser o amanhã para você.
+    </div>
+</div>
+
+<!-- Poema 5 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Caminhos</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Caminhos que se entrelaçam, se repelem, se ignoram,<br>
+        Veredas do bem e do mal,<br>
+        Trilhas da felicidade e da melancolia,<br>
+        Rotas de luz e sombras intermináveis.<br><br>
+
+        Afinal, para que servem?<br>
+        Seriam meras escolhas disfarçadas de destino?<br>
+        Não, o acaso não se contenta com tão pouco.<br>
+        Há algo além das pegadas que deixamos,<br>
+        Além das palavras que dizemos,<br>
+        Além dos sentimentos que ousamos nomear.<br><br>
+
+        Talvez sejam portas entreabertas,<br>
+        Passagens para vidas ainda por nascer.<br>
+        Ou talvez sejam apenas ecos,<br>
+        Ressonâncias de passos que já não nos pertencem.<br><br>
+
+        Caminhos da terra, da lua, do sol e do mar,<br>
+        Caminhos que riscam o céu e se perdem na escuridão e no infinito.<br>
+        Caminhos de uma vida inteira,<br>
+        Ou de fragmentos que jamais se encaixam.<br><br>
+
+        Pistas traçadas sobre estradas incertas,<br>
+        Onde o medo sussurra dúvidas a cada curva.<br>
+        Caminhos que nos levam a lugar nenhum,<br>
+        Caminhos que voltam ao ponto de partida,<br>
+        Sempre caminhos, eternos caminhos,<br>
+        Que se desfazem como névoa,<br>
+        E se revelam em ilusão.
+    </div>
+</div>
+
+<!-- Poema 6 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Amor Pungente</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        No leito fértil do jardim, guardo a rosa que brotou,<br>
+        Entre raízes e sonhos, cultivo o nosso amor.<br>
+        Um amor pungente, altivo, solene!<br>
+        Que germina ilusões como quem semeia esperanças,<br>
+        Mas fenece nas sombras do tempo,<br>
+        Como pétalas levadas pela brisa da dúvida.<br><br>
+
+        Um misto de culpa e desejo,<br>
+        Uma chama indomável que me consome e me retrai,<br>
+        Tornando o doce em amargor,<br>
+        Pois em cada reencontro,<br>
+        Revive-se o tormento de uma ferida aberta.<br><br>
+
+        Por que o destino se desabrocha assim?<br>
+        Um amor que surgiu como um sopro inesperado,<br>
+        Como ecoando em um antigo sobrado,<br>
+        Tal qual um cometa sem destino,<br>
+        Amor repentino que nasceu dentro de mim.
+    </div>
+</div>
+
+<!-- Poema 7 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Se um dia eu te perder</div>
+    <div class="poem-author">em parceria com Melanie Nascimento</div>
+    <div class="poem-content">
+        Se um dia eu te perder que seja para a morte,<br>
+        Porque enquanto vida tiver,<br>
+        Continuarei te amando dentro de mim.<br>
+        E mesmo que você não queira,<br>
+        Eu viverei e eternizarei até o limite de suas fronteiras,<br>
+        Transpondo barreiras mesmo que seja em busca de uma ilusão.<br><br>
+
+        Ainda que alimente meu ego e minha existência,<br>
+        Minha vida se transformou desde que te conheci.<br>
+        Não preciso mais de mim, necessito de nós.<br>
+        Preciso outra vez do teu olhar e do som de tuas palavras.<br>
+        Queria ser você por um instante,<br>
+        Só para experimentar a sensação de poder<br>
+        Sentir o tamanho desse amor, sob os teus olhos.<br><br>
+
+        A afeição que sinto causa cobiça até mesmo ao meu próprio ser.<br>
+        Te amar me consome e me aniquila,<br>
+        Mas ainda assim não consigo mais viver sem esse sentimento.<br>
+        Teu veneno seduzível entrou pelas entranhas do meu peito,<br>
+        Me tomando por inteiro, consumindo aquilo que sou,<br>
+        Me prendendo e libertando rumo aos caminhos do infinito.
+    </div>
+</div>
+
+<!-- Poema 8 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Restrito a Dois</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Deixar-se envolver, sem pressa, nos braços do amor,<br>
+        Perder-se na poesia de um livro aberto,<br>
+        Onde cada verso exalta o íntimo,<br>
+        E cada página traduz o desejo que inflama a pele,<br>
+        Acolhendo-o sobre mim com a intensidade do agora.<br><br>
+
+        Olhar teu rosto e reviver o que já foi eterno,<br>
+        Memórias que o tempo jamais apagará.<br>
+        Instantes selados, pertencentes apenas a nós,<br>
+        Segredos disfarçados no cotidiano,<br>
+        Guardados sob o véu da cumplicidade.<br><br>
+
+        Completar-se ao som dos pássaros,<br>
+        Que cantam nossa história em melodia e rima.<br>
+        O amor incondicional que te habita,<br>
+        Trancado a sete chaves no peito,<br>
+        Inviolável, imutável, imortal.<br><br>
+
+        Duas mentes fundidas em um único pensamento,<br>
+        Uma filosofia que transcende a existência,<br>
+        Extasiando cada instante sonhado,<br>
+        Consumindo-se no fogo do desejo,<br>
+        Que desafia até a razão.<br><br>
+
+        Deliciar-me ao pensar em ti,<br>
+        É sentir-me parte de algo maior.<br>
+        É acender a chama de cada reencontro,<br>
+        Inesperado, improvável, insaciável.<br>
+        Esse amor, árduo e denso,<br>
+        Que se faz presente, que se faz eterno —<br>
+        Restrito a dois.
+    </div>
+</div>
+
+<!-- Poema 9 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Desejo de Beijo</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Quando teus lábios encontram os meus,<br>
+        Sinto o céu se desenhar em arcos de luz,<br>
+        Meu coração galopa em disparada,<br>
+        Meu corpo se incendeia em um frenesi de sensações,<br>
+        Pois quando te beijo,<br>
+        O tempo, cúmplice do desejo,<br>
+        Pausa sua dança apenas para nos admirar.<br><br>
+
+        Quando anseio pelo gosto da tua boca,<br>
+        Sinto o mundo girar ao contrário.<br>
+        Tua pele toca a minha,<br>
+        Fazendo-me perder o respirar,<br>
+        Suplicando por mais e mais,<br>
+        Por beijos que não terminam,<br>
+        Por vontades que se confundem.<br><br>
+
+        Desejo de beijos!<br>
+        Quando as línguas se entrelaçam,<br>
+        Num bailar em ritmo secreto,<br>
+        Entre estalos e murmúrios de prazer incontido.<br><br>
+
+        Desejos que queimam, que fluem, que imploram,<br>
+        De lábios que se buscam, incansáveis,<br>
+        Na ânsia eterna da arte gostosa de beijar.
+    </div>
+</div>
+
+<!-- Poema 10 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Soneto do Amor Informatizado</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Já não me olha nos olhos,<br>
+        Nem lê as cartas que um dia lhe enviei.<br>
+        Agora espera apenas mensagens,<br>
+        Na tela onde me deletei.<br><br>
+
+        Não há mais brigas, nem mesmo afeto,<br>
+        A conversa se perdeu no silêncio frio.<br>
+        O que a prende é um mundo abstrato,<br>
+        No TikTok tudo é fugaz, tudo é vazio.<br><br>
+
+        Já não há palavras, só notificações,<br>
+        Fui trocado pela era digital,<br>
+        Um amor encapsulado por conexões.<br><br>
+
+        E eu? Me sinto à beira do final,<br>
+        Pois como lutar contra algoritmos,<br>
+        Se meu amor é humano e real?
+    </div>
+</div>
+
+<!-- Poema 11 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Relação Apoteótica</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Não diga o que não quero ouvir,<br>
+        Não faça o que meus olhos não enxergam.<br>
+        Nunca tente decifrar o verdadeiro sentido do amor,<br>
+        Pois ele muda a cada toque, a cada silêncio.<br><br>
+
+        Negue meu nome três vezes antes de me encarar,<br>
+        Mas não fale verdades disfarçadas de ilusões.<br>
+        Saiba esconder-se nas entrelinhas,<br>
+        Refugie-se no mais ardente sentimento.<br><br>
+
+        Novas experiências conduzem ao êxtase,<br>
+        Mas também ao abismo.<br>
+        Não coloque palavras em minha boca,<br>
+        Não atribua a mim gestos que ainda não fiz.<br><br>
+
+        A paixão não morre tão facilmente,<br>
+        Mas pode se perder se for sufocada pelo medo.<br>
+        Confie meus segredos ao mais nobre coração,<br>
+        Não os enterre em uma tumba empoeirada,<br>
+        Não aprisione seus sentimentos na clausura do orgulho.<br><br>
+
+        Não me revele o lado escuro da vida que insisto em evitar.<br>
+        Nenhum amor dura para sempre —<br>
+        Principalmente quando ainda somos juvenis,<br>
+        Ainda que, na alma, acreditemos no impossível.<br><br>
+
+        Talvez sejamos prisioneiros de um mundo inventado,<br>
+        Talvez sejamos apenas dados lançados ao acaso.<br>
+        Desventuras moldadas pelo destino,<br>
+        Que se refletem em teus olhos como chamas ardentes,<br>
+        Inflamando teu corpo junto ao meu,<br>
+        Enquanto tudo arde — antes que se apague pela eternidade.
+    </div>
+</div>
+
+<!-- Poema 12 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Queria ser você</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Chuva de pétalas dança sob o céu estrelado,<br>
+        E eu, perdido entre versos e devaneios,<br>
+        Como um poeta eternamente apaixonado,<br>
+        Capaz de escrever em prosa e rima<br>
+        O que a alma sente e que o corpo deseja,<br>
+        Aquilo que o amor sussurra no silêncio da noite!<br><br>
+
+        Queria ser músico—<br>
+        Cantar e tocar a nossa história,<br>
+        Fazendo da melodia um refúgio,<br>
+        Do som, um abrigo excitante para o coração.<br><br>
+
+        Gravar um sentimento,<br>
+        Eternizar um instante,<br>
+        Reviver em notas aquilo que o tempo tenta apagar.<br><br>
+
+        Queria ser você, ouvinte,<br>
+        Que encontra na música um pedaço de si,<br>
+        Que se embriaga em acordes<br>
+        E nunca deixa morrer<br>
+        Essa chama inquieta de sua inspiração.<br><br>
+
+        Queria ser você —<br>
+        Poeta, músico, ouvinte,<br>
+        Ser todos ao mesmo tempo, no mesmo instante,<br>
+        Fugir do peso da realidade,<br>
+        Para transformar cada suspiro em arte,<br>
+        E deixar minha liberdade florescer.
+    </div>
+</div>
+
+<!-- Poema 13 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Ainda que eu queira te revelar</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Às vezes me perco,<br>
+        Como se o mundo me deixasse para trás,<br>
+        Um horizonte vazio, sem teu sorriso,<br>
+        Sem o calor do teu amor<br>
+        Para acalmar essa dor que me consome.<br><br>
+
+        Às vezes, um olhar diz mais que mil beijos,<br>
+        E o silêncio guarda segredos que minha voz não ousa pronunciar.<br><br>
+
+        Paixão sem fronteiras, sem limites,<br>
+        Que pulsa, que é oculta, que é intensa,<br>
+        E que por vezes tenho receio de revelar.
+    </div>
+</div>
+
+<!-- Poema 14 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Em todos os sentidos</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Pensar em ti não como mero desejo,<br>
+        Mas como um pedaço que me completa,<br>
+        Essência que me preenche os espaços vazios.<br><br>
+
+        Cair nas redes dessa paixão avassaladora,<br>
+        Enlouquecer no calor dos teus braços,<br>
+        Mergulhar no abraço que eterniza o instante,<br>
+        Onde cada toque é um poema silencioso.<br><br>
+
+        Teu beijo, doce além do que a língua conhece,<br>
+        Saboreio na memória como quem guarda um relicário.<br>
+        Mesmo sem tua presença, te tenho dentro de mim,<br>
+        Pois tua figura se insinua em cada pensamento,<br>
+        Mesmo que minhas mãos não alcancem tua pele,<br>
+        Te sinto, te percebo,<br>
+        Te desenho nos contornos da saudade.<br><br>
+
+        Nos versos que me habitam, te escrevo,<br>
+        Te componho em cada batida do peito,<br>
+        E ao te esculpir em meu corpo,<br>
+        Desfaço-me em êxtase,<br>
+        Revivendo tua voz em ecos de lembrança,<br>
+        Derretendo-me na ausência que ainda te contém.<br><br>
+
+        Nosso amor desconhece limites,<br>
+        Não obedece fronteiras no horizonte,<br>
+        Puro em essência, inabalável na forma,<br>
+        Feito da substância dos desejos mais profundos.<br>
+        E assim permanecerá, indelével e eterno,<br>
+        Gravado em letras invisíveis,<br>
+        Na sagrada escritura dos nossos corações.
+    </div>
+</div>
+
+<!-- Poema 15 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">O Ato Consumado</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Devoro cada palmo do teu corpo,<br>
+        Mergulho nas marés cálidas da tua pele,<br>
+        Procurando, na geografia do teu desejo,<br>
+        O ápice que me embriaga e me enlouquece.<br><br>
+
+        Na tua nudez, a aurora se desenha,<br>
+        Uma rosa que desabrocha em ouro líquido,<br>
+        Gotas de suor traçando mapas na paixão,<br>
+        Palpitações que dançam ao compasso do ímpeto,<br>
+        O grito inesperado que rompe a madrugada,<br>
+        Guardião da beleza oculta nas manhãs.<br><br>
+
+        E quando o dia desperta,<br>
+        Encontro-te entre lençóis desalinhados,<br>
+        Teu corpo ainda em brasa sob o véu da noite.<br>
+        Guardo-te em meu peito,<br>
+        Nosso ato de prazer consumado,<br>
+        Onde cada toque se torna lembrança,<br>
+        Cada suspiro, um verso inacabado.<br><br>
+
+        Vivendo esse instante <br>
+        Vejo o mundo por um prisma que só os amantes conhecem.<br>
+        E no fim do ato, um rito solene:<br>
+        Repasso na pele cada vestígio da tua presença,<br>
+        Revivo cada instante dessa febre interminável,<br>
+        E percebo que, enquanto vida houver,<br>
+        Essa noite jamais terá fim.
+    </div>
+</div>
+
+<!-- Poema 16 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Colecionar</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Selos, moedas, cartões postais,<br>
+        Canetas que nunca escrevem histórias,<br>
+        Papéis de carta com palavras que não chegam,<br>
+        Tampinhas de garrafa que selam lembranças.<br><br>
+
+        Bonecos sem infância, livros empoeirados,<br>
+        CDs riscados, mensagens perdidas no tempo.<br>
+        Chapéus que guardam ideias,<br>
+        Quadros que aprisionam paisagens,<br>
+        Garrafas de vinho secas de significado,<br>
+        Camisetas que vestiram dias melhores.<br><br>
+
+        Rótulos de refrigerante que marcam momentos,<br>
+        Brincos órfãos, fotos desbotadas,<br>
+        Pinturas de sentimentos nunca ditos,<br>
+        Carros que rodaram caminhos de ninguém.<br><br>
+
+        Cartas de amor que nunca foram lidas,<br>
+        Rabiscos, VHSs de um passado sem replay,<br>
+        Softwares obsoletos, dicionários de línguas esquecidas,<br>
+        Receitas culinárias de sabores nunca provados.<br><br>
+
+        Móveis que sustentam memórias,<br>
+        Sapatos que pisaram sonhos desfeitos.<br>
+        Relógios parados no tempo de quem partiu,<br>
+        Esmaltes descascados de mãos que já se soltaram,<br>
+        Telefones que não tocam mais,<br>
+        Perfumes que evaporaram junto com a presença.<br><br>
+
+        Revistas rasgadas, gibis sem finais,<br>
+        Bibelôs que acumulam poeira e ausências.<br>
+        Aparelhos eletrônicos de um futuro obsoleto,<br>
+        Radiografias de ossos e saudades,<br>
+        Receitas médicas para dores incuráveis,<br>
+        Embalagens vazias de biscoitos nunca saboreados.<br><br>
+
+        Cosméticos que cobrem cicatrizes invisíveis.<br>
+        Nada... Coisa alguma... Tudo...<br>
+        Instrumentos que se desafinam,<br>
+        Boletins esquecidos, fardas que já não servem,<br>
+        Cartas de demissão, bilhetes de despedida,<br>
+        Listas telefônicas de números que não atendem,<br>
+        Brinquedos quebrados de adultos que não cresceram.<br><br>
+
+        Bolas de futebol furadas, carismas forçados,<br>
+        Velas e incensos queimando sem propósito,<br>
+        Despachos de fé e desespero.<br>
+        Flores secas, chaves de portas nunca abertas,<br>
+        Bolsas vazias, extratos de contas no vermelho,<br>
+        Panos de prato que enxugaram lágrimas.<br><br>
+
+        Artistas que não brilham,<br>
+        Poetas que esqueceram as palavras...<br>
+        ( ... ), ( ... ), ( ... ), ( ... ), ( ... ), ( ... ),<br>
+        E a coleção continua... O que você traz pra mim?
+    </div>
+</div>
+
+<!-- Poema 17 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Curtindo a Vida</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Deixo a vida me guiar, sem amarras e sem medo,<br>
+        Bebo cada instante como se fosse o último gole do tempo.<br>
+        Sigo à risca o dilema da existência,<br>
+        Pois sonhar com o amanhã nunca foi desperdício,<br>
+        E sim combustível para seguir em frente.<br><br>
+
+        Olho o mundo por ângulos que poucos enxergam,<br>
+        Saboreio cada segundo com a intensidade do agora,<br>
+        Reinvento meu próprio ritmo,<br>
+        Transformo a rotina em espetáculo,<br>
+        Deixo a emoção ser a tinta que colore meus dias.<br><br>
+
+        Não permito que essa chama se apague,<br>
+        Essa centelha de esperança viva e pura,<br>
+        Que brilha em meu olhar<br>
+        E ilumina os caminhos que trilho.<br><br>
+
+        Sinto o pulso da vida,<br>
+        Deixo o amor guiar meus passos,<br>
+        Tento esquecer meus fardos, e liberto a minha dor,<br>
+        Porque viver é arte, e cada dia,<br>
+        É uma tela esperando ser pintada.
+    </div>
+</div>
+
+<!-- Poema 18 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Para o Trabalhador</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Boto fé naqueles que se despertam antes do sol,<br>
+        Que batem o ponto enquanto a cidade boceja,<br>
+        Que carregam nos ombros o peso do país,<br>
+        E não deixam a esperança se desfazer em seu cansaço matinal.<br><br>
+
+        Na vontade de ser e estar no auge da fama,<br>
+        Enfiado na lama do caos social,<br>
+        Lutam, resistem, buscam um pedaço da justiça,<br>
+        Mesmo quando o sistema os enterra vivos.<br><br>
+
+        É belo ao amanhecer,<br>
+        Trocando cumprimentos simples, sinceros,<br>
+        Um desejo de sorte, um voto de fé,<br>
+        No juízo final.<br><br>
+
+        Ei, esse vai para você —<br>
+        Que desperta para a vida,<br>
+        Que molda o mundo com as mãos,<br>
+        Que planta o suor e colhe o amor,<br>
+        E que, apesar de tudo,<br>
+        Ainda sonha com um futuro digno,<br>
+        Para o trabalhador.
+    </div>
+</div>
+
+<!-- Poema 19 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Até Quando?</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Fiquei preso no tempo, refém de tuas lembranças,<br>
+        Teu nome gravado no eco dos dias,<br>
+        Enquanto a tristeza, cúmplice do silêncio,<br>
+        Se esconde, mas nunca se desfaz.<br><br>
+
+        A saudade arde como brasa na carne,<br>
+        E queima como um vício que não se quer largar,<br>
+        Te desejo, te anseio,<br>
+        Noite e dia, sem cessar.<br><br>
+
+        Seguro teu retrato desbotado pelo tempo,<br>
+        Mas teus olhos ainda brilham e te vejo novamente me conquistar.<br>
+        Um sorriso suspenso, um abraço inacabado...<br>
+        Semente do amor que volta a me brotar.<br><br>
+
+        Até quando ficaremos afastados?<br>
+        Quanto tempo mais tenho que suportar nesse abismo sem fim?<br>
+        Até onde essa espera me levará,<br>
+        Se o destino insiste em nos desencontrar?
+    </div>
+</div>
+
+<!-- Poema 20 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Dura Vida</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Pés descalços, entregues ao asfalto cruel,<br>
+        Onde o frio lacera e a fome grita —<br>
+        Um grito mudo, que rasga a alma em retalhos<br>
+        E se perde no eco da indiferença.<br><br>
+
+        O preconceito, corta a carne e aprofunda a ferida,<br>
+        Olhares que julgam,<br>
+        Rotulado por palavras que pesam,<br>
+        Expulso do direito de existir.<br><br>
+
+        Para a sociedade, é apenas um espectro,<br>
+        Sem nome, sem rosto, sem voz.<br>
+        Cabeça baixa, mãos trêmulas,<br>
+        Pede auxílio onde não há compaixão.<br><br>
+
+        Abraça a noite densa como única morada,<br>
+        E quando uma réstia de luz se insinua,<br>
+        Logo vem a sentença impiedosa:<br>
+        "Passa amanhã, hoje não tem" — Vagabundo!<br><br>
+
+        Dizem, sem sequer olhar nos olhos.<br>
+        Humilhado, devastado,<br>
+        A fé se torna o último refúgio.<br>
+        Uma chama que precisa resistir,<br>
+        Um sopro de esperança que não pode se apagar.<br><br>
+
+        Os sonhos são tudo que lhe resta,<br>
+        E quando a sorte, caprichosa e rara,<br>
+        Lança-lhe um punhado de moedas,<br>
+        O coração vibra, os olhos brilham,<br>
+        E entre a exaustão e a gratidão,<br>
+        Uma voz sussurra entre sorrisos sem graça:<br>
+        "Graças a Deus, hoje vamos comer."<br><br>
+
+        Segue adiante, esperançoso,<br>
+        Mas carregando nos ombros<br>
+        O peso de uma saga impiedosa,<br>
+        Que se alastra, invisível, insensível,<br>
+        Nos corações de quem nunca soube o que é ter nada.
+    </div>
+</div>
+
+<!-- Poema 21 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Eram Meninos</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        ( … ) Eram meninos, e assim sempre seriam,<br>
+        Carregavam sonhos nos bolsos rasgados,<br>
+        Sorrisos ingênuos bordados na face,<br>
+        Caminhavam sem pressa para um futuro incerto,<br>
+        Enquanto a infância brincava entre as sombras.<br><br>
+
+        Teceram risos, correram na liberdade dos dias,<br>
+        Tocaram a glória efêmera da juventude.<br>
+        Mas o laço se desfez antes da hora,<br>
+        A estrada interrompida por um destino cruel,<br>
+        E o último passo selou o silêncio,<br>
+        Cortando o pulsar de um coração ainda nobre.<br><br>
+
+        Caíram ao chão como restos esquecidos,<br>
+        Feito xepa da feira, descartados sem razão.<br>
+        Exalaram as últimas palavras ao vento,<br>
+        Murmuraram gestos sem tempo de resposta.<br><br>
+
+        Os olhos se fecharam sobre seus próprios corpos,<br>
+        E suas vozes foram invocadas entre soluços,<br>
+        Entre gritos sufocados pela dor inominável.<br>
+        Recolheram o projétil frio de 15 mm,<br>
+        Cobriram a vida que não mais respirava.<br><br>
+
+        Mas junto deles, algo renasceu,<br>
+        Entre a perda e a ausência,<br>
+        No chão manchado de um adeus precoce,<br>
+        Surgiu uma nova existência,<br>
+        Nasceram… renasceram com eles…<br>
+        E o fim escreveu-se ali,<br>
+        No eco surdo da despedida.
+    </div>
+</div>
+
+<!-- Poema 22 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Desamigos</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Falsos profetas, falsas palavras,<br>
+        A quem fui me confiar?<br>
+        Que tolice crer em pessoas vãs,<br>
+        Em sorrisos moldados pela conveniência.<br><br>
+
+        Nada há a dizer sobre aqueles que me traem,<br>
+        Sobre os que partiram sem olhar para trás.<br>
+        Nomes que se apagaram da minha história,<br>
+        Gente indigna até do fardo da lembrança.<br><br>
+
+        Nos meus relatos, nada encontrarás,<br>
+        Pois falsos versos não merecem tinta que se gasta,<br>
+        São ruídos dispersos no éter,<br>
+        Fragmentos de promessas sem alma.<br><br>
+
+        Aprendi, sim... Eu aprendi!<br>
+        Que nem todos merecem tua entrega,<br>
+        Que a confiança, quando mal depositada,<br>
+        É lâmina afiada contra o próprio olho.
+    </div>
+</div>
+
+<!-- Poema 23 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Um dia</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Um dia a gente vai perdendo amigos, lembranças, medos,<br>
+        No outro vai ficando mais amargo, vazio, azedo.<br>
+        Tem dias que a gente vai ficando perdido, opaco, sem jeito,<br>
+        Em outros vai embora o brilho, a vontade, a coragem e o enredo.<br>
+        Há dias que se sente ausente de si mesmo,<br>
+        Tem vezes que surge uma esperança, um lampejo, um segredo e um desejo.<br>
+        E então recomeça tudo<br>
+        Nesse mar de profundo desespero.
+    </div>
+</div>
+
+<!-- Poema 24 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">A Cara do Brasil</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Brasil, território indefinido na cartografia da modernidade,<br>
+        Nação anestesiada, tingida pelo sangue pútrido dos poderosos,<br>
+        Reflexo disforme de uma identidade cultural enlatada,<br>
+        Abismo de tramas obscuras e negociatas torpes,<br>
+        Reduto inflamado de consciências estéreis.<br><br>
+
+        Marchamos de costas para o futuro,<br>
+        Retrocedendo passo a passo ao marco zero,<br>
+        Enquanto um povo sonâmbulo vagueia pela alienação,<br>
+        Devoto fervoroso da mais vil forma de entretenimento.<br><br>
+
+        Exalamos o perfume da irrelevância para os olhos de estrangeiros,<br>
+        Endividados entre o céu e o inferno —<br>
+        Leiloamos nossas almas ao primeiro lance,<br>
+        Na esperança vã de quitarmos um débito impagável,<br>
+        Enquanto o relógio do destino avança sem piedade.<br><br>
+
+        Erguemos, nauseados, nossa bandeira já manchada pela hipocrisia,<br>
+        Entoamos o hino com vozes destituídas de convicção,<br>
+        Vestimos a pele da pátria mãe gentil como um disfarce barato,<br>
+        Num teatro farsesco de patriotismo envergonhado.<br><br>
+
+        Somos uma nação iludida na órbita global,<br>
+        Talvez uma partícula insignificante.<br>
+        Não inovamos e nem investimos como deveríamos,<br>
+        Ainda não moldamos o amanhã,<br>
+        Seguimos pegadas alheias em trilhas gastas.<br><br>
+
+        Ignoramos a tecnologia que governa o presente,<br>
+        Repetimos, sem reflexão, os discursos desgastados do passado,<br>
+        E nos deitamos na inércia intelectual,<br>
+        Enquanto o mundo gira — sem nos consultar.
+    </div>
+</div>
+
+<!-- Poema 25 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Politicagem</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Pacóvio de pose altiva, soberbo bufão,<br>
+        Alma rasa, desterrada,<br>
+        Cadáver ambulante de moral extinta,<br>
+        Magnata enclausurado pelo próprio ego.<br><br>
+
+        Dândi rejeitado, ébrio da própria mentira,<br>
+        Sucessor hipócrita de fútil ideologia,<br>
+        Verme rotulado de estadista,<br>
+        Carniceiro dos sonhos alheios.<br><br>
+
+        Platicéfalo vazio,<br>
+        Porco que chafurda na lama mais pútrida,<br>
+        Demagogo insaciável, devorador de esperanças,<br>
+        Insensível tirano travestido de líder.<br><br>
+
+        Insolente, insano, insensato,<br>
+        Arbitrário em sua arrogância,<br>
+        Miserável na consciência,<br>
+        Cognato da desgraça,<br>
+        Marionete de um jogo sujo<br>
+        Onde todos se perdem na busca pelo poder.
+    </div>
+</div>
+
+<!-- Poema 26 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Porta-voz</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Sou porta-voz de uma nação esquecida,<br>
+        Moldada no descaso, sufocada pela fome.<br>
+        Um país humilhado em sua própria terra,<br>
+        Deprimido na sombra de promessas vazias,<br>
+        Ofendido pela miséria que grita em silêncio,<br>
+        Devastado por mãos que fingem governar.<br><br>
+
+        No peito, a dor de não ter o que comer,<br>
+        No olhar, a utopia que nunca chega.<br>
+        Sonhos distantes, varridos pelo vento da indiferença,<br>
+        Restos de um coração dilacerado, inconformado.<br><br>
+
+        Fases de crise, rostos de um mundo desigual,<br>
+        Farsas que romantizam a "época de ouro",<br>
+        Enquanto a verdade se esconde entre cifras e trapaças.<br><br>
+
+        Nos olhos cansados, um brilho insistente —<br>
+        A esperança fragmentada, repartida,<br>
+        Mas nunca entregue por inteiro.<br><br>
+
+        Suor e lágrimas escorrem dos rostos marcados,<br>
+        Desenhando o retrato de um país que sangra.<br>
+        Verde, amarelo, azul e branco —<br>
+        Cores de uma pátria que se desbota,<br>
+        Onde batalhamos dia após dia<br>
+        Para conquistar ao menos um pedaço de sonho.<br><br>
+
+        E enquanto a elite se farta,<br>
+        O povo empurra a fome com a barriga,<br>
+        Sob um passado negro e um futuro oblíquo,<br>
+        Emaranhado em dívidas que nunca serão pagas.<br><br>
+
+        Se alguém ousa encarar os fantasmas<br>
+        Que rondam o país falido,<br>
+        Logo tem sua voz silenciada,<br>
+        Sua boca fechada pela descrença ou pela morte.<br><br>
+
+        Direitos? Foram leiloados.<br>
+        Liberdade? Apenas uma palavra reescrita.<br>
+        A ditadura acabou? Não.<br>
+        Só mudou de nome e está travestida em outro disfarce.<br><br>
+
+        Ainda se mata por verdades reveladas,<br>
+        Ainda se tortura por denúncias inconvenientes.<br>
+        Ainda se cospe na dignidade de quem tenta resistir,<br>
+        Porque aqui questionar se tornou crime,<br>
+        Porque aqui mudar a história virou uma sentença.<br><br>
+
+        E assim seguimos,<br>
+        Presos ao peso do fardo chamado Brasil.
+    </div>
+</div>
+
+<!-- Poema 27 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Prisioneiro Político</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Não posso pensar, não posso agir<br>
+        Obedeço ordens de muitos<br>
+        Ninguém me ouve, ninguém me escuta<br>
+        Eles pensam com os pés<br><br>
+
+        Gritos desesperados saem da sala ao lado<br>
+        Não posso fazer nada<br>
+        Sou mantido como um prisioneiro de guerra<br>
+        Eles torturam... Eles matam...<br><br>
+
+        Fazem a gente confessar coisas que não fizemos<br>
+        Fazem-nos assinar papéis alegando a nossa culpa<br>
+        O silêncio é a nossa única arma<br><br>
+
+        Não sei onde vivo, nem sei que país é este<br>
+        Onde o simples ato de pensar<br>
+        Faz a diferença entre a vida e a morte.
+    </div>
+</div>
+
+<!-- Poema 28 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Americanizado uma P...</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Americanizados somos,<br>
+        Atados às correntes do tempo, reféns da história que não é a nossa.<br>
+        Nosso legado cultural, reduzido a um eco dissonante,<br>
+        Uma nota apagada no grande compêndio das nações.<br><br>
+
+        Cultura, não herdada, mas imposta!<br>
+        Cruzaram nosso oceano e nos compraram com badulaques,<br>
+        Nos invadiram com promessas de modernidade e progresso,<br>
+        Mas recheada do mais puro vazio.<br><br>
+
+        Rasgamos nosso idioma nativo no altar da conveniência,<br>
+        Substituímos nossa voz por sotaques emprestados.<br>
+        O espelho reflete um rosto que já não nos pertence,<br>
+        Moldado pelo molde fabricado em além-mar.<br><br>
+
+        Nossa vestimenta, um uniforme estrangeiro,<br>
+        Nosso pensamento, uma cópia distorcida sem nossa alma Tupi,<br>
+        Nossa visão de mundo, refém de uma ótica imposta.<br><br>
+
+        Aplaudimos, servilmente, cada espetáculo que nos iludem,<br>
+        Vibramos ao som de palavras que não nos nomeiam.<br>
+        O que pensam é lei, o que decidem é dogma,<br>
+        O que criam, veneramos sem questionar.<br><br>
+
+        E aquilo que é nosso? Resta à sombra da insignificância,<br>
+        Pisoteado pelo peso de um primeiro mundo<br>
+        Que se ergue às custas de sua própria ficção,<br>
+        Esmagando o resto do planeta sob o rótulo de seu império da grandeza.
+    </div>
+</div>
+
+<!-- Poema 29 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Geração Silicone</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Quem somos? O que nos tornamos?<br>
+        Moramos no país da bunda, do riso fácil, das mentes vazias.<br>
+        O país onde o vento faz a curva e vai embora,<br>
+        Levando consigo qualquer esperança de consciência.<br><br>
+
+        O que nos foi predestinado?<br>
+        Somos um exército de cabeças ocas?<br>
+        Marionetes do espetáculo de massa?<br>
+        Manipulados por ondas que atravessam telas e frequências?<br><br>
+
+        Não pensamos — repetimos.<br>
+        Não questionamos — acatamos.<br>
+        Vivemos de tendências fabricadas,<br>
+        De ideias descartáveis, de modismos enlatados.<br><br>
+
+        Estalam os dedos, ditam as regras,<br>
+        E, como bons fantoches, mudamos de lado.<br>
+        Nosso pensamento não é nosso,<br>
+        Nosso julgamento é emprestado.<br><br>
+
+        A vida é cruel, impiedosa, inquestionável.<br>
+        Somos um código-fonte inacabado,<br>
+        Um sistema inoperante, à base da manipulação social.<br><br>
+
+        Somos a geração silicone —<br>
+        Plástica, superficial, moldada para agradar.<br>
+        Recebemos um legado tóxico de gerações passadas,<br>
+        E seguimos como cópias defeituosas de um modelo falho.<br><br>
+
+        Lavagem cerebral diária,<br>
+        Absorvemos sem perceber, engolimos sem mastigar,<br>
+        Somos o Brasil —<br>
+        E, por mais que alguns lutem para escapar,<br>
+        Estamos presos à estrutura que nos moldou.
+    </div>
+</div>
+
+<!-- Poema 30 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Construindo a Decadência</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Atitudes, virtudes, opiniões, consciência...<br>
+        Fios frágeis, facilmente puxáveis,<br>
+        Pelos que moldam a verdade ao sabor do lucro,<br>
+        Arquitetos da alienação programada,<br>
+        Engenheiros da desistência,<br>
+        Que transformam cidadãos em ecos sem sentido.<br><br>
+
+        Entidades de massa, operárias do embuste,<br>
+        Tecem o véu da desinformação,<br>
+        Distorcem visões, lapidam ilusões,<br>
+        Erguem espetáculos de farsas,<br>
+        Onde a cultura popular se torna moeda de troca,<br>
+        Um jogo sujo de interesses,<br>
+        Negociado no mercado da ignorância.<br><br>
+
+        Atacam sem rosto, sem nome, sem culpa,<br>
+        Pintam a realidade com cores inexistentes,<br>
+        Maquiam a miséria, esculpem o caos,<br>
+        Produzem um teatro de sombras e escombros,<br>
+        Onde a verdade não passa de um artifício barato.<br><br>
+
+        Não poupam nem aqueles que sempre acreditam,<br>
+        Que sentem orgulho de uma bandeira, de um significado esquecido,<br>
+        Pois construindo mentiras eles vendem como dogmas,<br>
+        E empurram o país em um abismo sem fim.<br><br>
+
+        E lá está ele, o espectador incauto,<br>
+        Sentado diante de outra tela brilhante,<br>
+        Absorvendo a ignorância servida como fato,<br>
+        Um GLOBO de notícias recicladas,<br>
+        Manipuladas em uma realidade duvidosa,<br>
+        Sem respeito, sem fundamento,<br>
+        Apenas um eco incessante da decadência construída.
+    </div>
+</div>
+
+<!-- Poema 31 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Escrevivenciando a Sociedade</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Prostituinviabilidade.<br>
+        O preço da dignidade à venda na esquina,<br>
+        O poder dançando entre acordos pútridos.<br>
+        Aos opostos, convergência forçada.<br>
+        Aos seres humanos, a ilusão de continuação.<br>
+        Aos incrédulos, a fé fabricada pré-moldada na alienação.<br>
+        À elite hipócrita, sentimento de falsa humanização.<br><br>
+
+        Quem nunca desceu ao nível da lama?<br>
+        E aos que já se afogam no lodo,<br>
+        Resta a união como último refúgio.<br>
+        Aos cegos do privilégio,<br>
+        A realidade nada mais é que um espelho trincado.<br><br>
+
+        Vivemos escrevivenciando o caos urbano,<br>
+        Testemunhando mudos a própria ruína,<br>
+        Perdidos entre escombros que ainda insistem em maquiar.<br>
+        Os quadrúpedes da elite mafiosa<br>
+        Marcham sobre corpos que não se enterram.<br>
+        Morte anunciada — sentença inevitável,<br>
+        Enquanto os vivos seguem inconsequentes,<br>
+        Carregando o peso dos distúrbios que criaram.<br><br>
+
+        A sociedade em seu leito teatral,<br>
+        Com máscaras que caem sem jamais revelarem a verdade.<br>
+        O sangue dos trabalhadores se misturando às águas de nossas ruas,<br>
+        A miséria urbana que tomou conta de nosso cenário.<br><br>
+
+        De braços cruzados, assistimos inertes<br>
+        Ao país desmoronar sobre nossas cabeças,<br>
+        Sem mover um só dedo para reerguê-lo.<br>
+        Nos resta o silêncio?<br>
+        Nos resta apagar o brilho que um dia houve em nossos olhos?<br>
+        Ainda não!<br><br>
+
+        Se ergueremos nossa luta,<br>
+        Se ousarmos desafiar a estrutura,<br>
+        Talvez o mais forte caia ao nascer do dia.<br>
+        Determinismo? Não nos serve!<br>
+        O destino não se escreve sozinho.<br>
+        Humanismo? Talvez seja a chave da transformação,<br>
+        Se a mudança for mais do que palavras,<br>
+        Venceremos!
+    </div>
+</div>
+
+<!-- Poema 32 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">O Vício Monetário</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        O mundo afunda, lenta e irremediavelmente,<br>
+        Enquanto valores desmoronam sem alarde.<br>
+        A fé já não habita corações,<br>
+        Apenas gira em torno de cifras e doações,<br>
+        Onde o peso do dinheiro vale mais<br>
+        Do que qualquer gesto de compaixão.<br>
+        A ilusão da aquisição cega os sentidos,<br>
+        E o brilho dourado das moedas<br>
+        Apaga o valor imensurável do outro.<br>
+        Perde-se o senso, perde-se a alma,<br>
+        E na compulsão desmedida,<br>
+        Adoramos o dinheiro como um deus silencioso,<br>
+        Pisoteamos sem remorso,<br>
+        Moldamos nossa moral ao preço do dia.<br>
+        Esquematicamente, um entorpecente letal.<br>
+        Psicologicamente, um vício incurável.<br>
+        Sociologicamente, a arma dos mais poderosos.<br>
+        Individualmente, a neurose coletiva<br>
+        Que devora o que nos resta de humanidade.<br>
+        A cada dia, o abismo social se alarga,<br>
+        A diferença se impõe como sentença.<br>
+        O dinheiro explode em nossas mãos como uma bomba,<br>
+        Seu efeito é avassalador e seu feito... O que importa?<br>
+        Ironicamente,<br>
+        Quem o tem geralmente não encontra a felicidade verdadeira,<br>
+        Jamais saberá o que vem a ser em sua essência.<br>
+        Pois tudo é válido para consegui-lo,<br>
+        Mas nem sempre vem acompanhado de alegrias.
+    </div>
+</div>
+
+<!-- Poema 33 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Sobre nossa gafieira</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Já se foi o tempo de uma crítica construtiva,<br>
+        Agora, a descrença é lei, a desesperança, nossa rotina.<br>
+        A maré de desânimo nos assola sem piedade,<br>
+        E pior é que já nem estranhamos—aceitamos como normal.<br>
+        O pessimismo? Virou hábito.<br>
+        A angústia? Nossa identidade.<br>
+        A descrença? Um vírus incurável.<br>
+        E ainda ousam proclamar:<br>
+        — O governo quer valorizar o cidadão brasileiro!<br>
+        Piada de mau gosto, deboche travestido de promessa.<br>
+        Quem ainda acredita que há solução?<br>
+        — O Brasil crescerá 50 anos em cinco!<br>
+        O que importa se, a cada ano,<br>
+        Regredimos duas décadas?<br>
+        O que esperar do bailar dessa nossa gafieira?<br>
+        De tudo... nada, quase acreditamos neles.<br>
+        Mas basta um estalar de dedos<br>
+        E surgem, ávidos, na partilha da verba,<br>
+        Desviada, extorquida, transferida,<br>
+        Paraísos fiscais embelezando a história,<br>
+        Mandada para as ilhas Cayman ou bancos na Suíça<br>
+        (Os paraísos fiscais fazem parte da nossa história!)<br>
+        Onde a corrupção repousa tranquila e soberana.<br>
+        Nossos estatutos nos ferem<br>
+        Sempre que protegem os donos do “poder”.<br>
+        Polícia que mata refém e liberta bandido,<br>
+        A lei do silêncio governa em nossas favelas.<br>
+        E nos jornais, a manchete de sempre:<br>
+        “Traficantes comandam o Brasil de dentro de Bangu I”<br>
+        Mordomia para eles,<br>
+        Cadeia e miséria para nós.<br>
+        E de que nos vale ser pentacampeões,<br>
+        Se atrás de um troféu dourado<br>
+        Se esconde um presente, um passado tão sombrio quanto o futuro?<br>
+        Rezemos, clamemos aos céus —<br>
+        Estamos perdidos.<br>
+        E eles?<br>
+        Bailam.<br>
+        Riem.<br>
+        E fazem da nossa dor o espetáculo conveniente de sempre.
+    </div>
+</div>
+
+<!-- Poema 34 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Ao Senhor</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        A cada aurora, ergo meu olhar ao céu,<br>
+        E em gratidão silenciosa, ofereço meu ser<br>
+        Ao Senhor, que me entregou o dom,<br>
+        Essa centelha divina que a vida lapidou,<br>
+        E ensinou-me a moldá-la com zelo e amor.<br>
+        A Ele consagro cada traço, cada verbo,<br>
+        Minha obra, minha essência,<br>
+        E esse amor que pulsa em meu peito,<br>
+        Imenso como o próprio infinito.<br>
+        Dele imploro a paz que me acalma,<br>
+        Essa estranha força que me sustenta,<br>
+        Luz que dissipa as sombras no caminho,<br>
+        E me guia além da tentação e do abismo.<br>
+        Nele repousa minha fé inquebrantável,<br>
+        Com Ele, nenhuma tempestade me afoga,<br>
+        Pois em suas mãos entrego minha esperança.<br>
+        <strong>Senhor,</strong><br>
+        Estendei Vossa graça,<br>
+        Regai de bondade os corações que amam verdadeiramente,<br>
+        Fazei florescer a amizade sincera,<br>
+        Para que o mundo, enfim,<br>
+        Conheça a paz que habita em Vós.
+    </div>
+</div>
+
+<!-- Poema 35 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Ser Mulher</div>
+    <div class="poem-author">em parceria com Amanda Peres</div>
+    <div class="poem-content">
+        Ser mulher é enxergar além das linhas do horizonte,<br>
+        É compreender o incompreensível,<br>
+        É trazer consigo o poder de conceder a vida,<br>
+        É viver em um abismo seguro,<br>
+        Com ternura a cada instante do seu tempo.<br><br>
+
+        Ser mulher é como transpor barreiras,<br>
+        Ir além do atingível,<br>
+        É romper fronteiras de luz,<br>
+        De glória e de esplendor.<br><br>
+
+        Ser mulher é vencer as batalhas do dia a dia,<br>
+        É trazer a arte no coração ao dar frutos ao amor,<br>
+        É, em silêncio, expressar seu grito de liberdade,<br>
+        Recriando seu próprio universo<br>
+        Para expor da forma mais contundente a quem deseje enxergar.<br><br>
+
+        Ser mulher é parar para ver as ondas do mar,<br>
+        É bater persistentemente em rochedos,<br>
+        Tão sólidos quanto a arte de viver.
+    </div>
+</div>
+
+<!-- Poema 36 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Tudo Parou</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        As fontes secaram,<br>
+        O verde se apagou,<br>
+        Os pássaros não cantaram,<br>
+        A mãe natureza parou.<br><br>
+
+        Os rios não correm mais,<br>
+        Que fim os levou?<br>
+        Na lembrança as saudades,<br>
+        Que seu brilho se ofuscou.<br><br>
+
+        As matas devastadas,<br>
+        O ser humano as queimou.<br>
+        A ave solitária que nunca mais voou,<br>
+        O solo em que comemos, a gente contaminou.
+    </div>
+</div>
+
+<!-- Poema 37 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">O Bar</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Há quem o chame de segunda casa,<br>
+        Outros dizem ser a oitava maravilha,<br>
+        Um refúgio onde a vida se afrouxa,<br>
+        Onde o riso e a ressaca dividem a conta.<br>
+        É recanto de boêmios e malandros,<br>
+        Reduto de sambistas e poetas errantes,<br>
+        Palco improvisado para discursos sobre o país,<br>
+        Confessionário informal dos problemas do cotidiano.<br>
+        Entre goles e acordes, me ausento do mundo,<br>
+        A realidade se dissolve na espuma do copo,<br>
+        Da batida da caixinha de fósforos ao som do violão,<br>
+        Vou lavando a alma em um templo sem dogmas,<br>
+        Onde todos cantam canções que o tempo tentou apagar.<br>
+        Se eu pudesse levava comigo<br>
+        Esse pedaço de liberdade embriagada,<br>
+        E revivia cada história que começou,<br>
+        Com um aperto de mãos ou com um simples desabafo<br>
+        Sobre a mesa de um bar.
+    </div>
+</div>
+
+<!-- Poema 38 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Decalcomania</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Sou um decalcomaníaco da existência,<br>
+        Impresso nos cenários da vida,<br>
+        Gravado nos contextos que se desenham ao redor.<br>
+        Sou arte pulsante nas veias do tempo,<br>
+        Embelezada por conceitos que se reinventam,<br>
+        Esboçada em traços intensos,<br>
+        Bruta e essencial,<br>
+        Mas repleta de uma simplicidade sublime,<br>
+        Que se entrega como dádiva<br>
+        E se impõe com grandeza.<br><br>
+
+        Carrego em minha marca registrada<br>
+        A paciência moldada pelo tempo,<br>
+        A serenidade que se reflete nos olhares atentos.<br>
+        Impetuoso, mas soberano,<br>
+        Distante da fragilidade que me espreita,<br>
+        Sou um equilíbrio tênue<br>
+        Entre a admiração e a moderação,<br>
+        Uma expressão viva que resiste,<br>
+        Em meio a um mar de plutocracia.
+    </div>
+</div>
+
+<!-- Poema 39 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Lição de Vida</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Sua obra inacabada nos faz entender os caminhos dessa vida,<br>
+        Perpetuando o amor entre as espécies donas de um único espaço físico.<br>
+        Sua pessoa representativa acaba de passar em branco,<br>
+        Muitas não entendiam o que queria dizer com suas expressões.<br>
+        Assim falava: <i>“Amor, palavra que liberta”</i> – <i>“Terra nossa mãe”</i>.<br>
+        Dono de uma dor incondicional guardada dentro de si pelo resto da vida,<br>
+        Pela perda de sua família achou na fé um modo de amenizar sua dor,<br>
+        Pregando o amor, a harmonia, a paz e a fé.<br>
+        Entre postes, fachadas, calçadas,<br>
+        Muros, pilares, laterais de ponte e tapumes,<br>
+        Encontrava sempre uma página aberta para seus ensinamentos.<br>
+        Rotulado de louco enfrentou o preconceito de peito aberto,<br>
+        Considerado um profeta ganhou seguidores que até hoje se lembram<br>
+        Do que ele dizia, do que ele sonhava, do que ele vivia.<br>
+        Perambulando pelas ruas do Rio de Janeiro,<br>
+        Encontrava a paz em cada esquina, em cada palmo do seu chão.<br>
+        <b>Gentileza “O Profeta”</b>, assim era conhecido no meio suburbano.<br>
+        Agora parte enfim para o que sempre sonhou,<br>
+        Agora sente a liberdade que sempre pregou.<br><br>
+
+        <div class="poem-dedication">
+            <i>  “Ao profeta Gentileza:<br>
+                por suas palavras, gestos, ensinamentos, expressões e vida”</i>
+        </div>
+    </div>
+</div>
+
+<!-- Poema 40 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">O Fato, no Ato, do Parto</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Do ato ao parto<br>
+        Do fato ao ato<br>
+        Do parto ao fato<br>
+        Dos fatos no ato.<br>
+    </div>
+</div>
+
+<!-- Poema 41 - Volume 3 -->
+<div class="poem">
+    <div class="poem-title">Problemática</div>
+    <div class="poem-author"></div>
+    <div class="poem-content">
+        Problemática: você me diz que soa mal em seus ouvidos<br>
+        Também deve soar meu nome como uma nota pertinente<br>
+        Distúrbios maléficos à sua incapacidade de viver<br>
+        Lembranças indesejadas, contínuos fantasmas do tempo<br>
+        Da morte em si, da vida alheia e de toda profanação<br>
+        Que causas aonde chegas<br><br>
+
+        Problemática: repugnância múltipla de sons<br>
+        Arma verbal utilizada para uma suposta briga de casal<br>
+        Estrutura penta silábica referida às avessas<br>
+        Bomba aportuguesada do meu conhecimento<br>
+        Sofrimento alheio causado por um certo interesse<br>
+        Mutação patogênica de minha literatura<br>
+        Intitulado por essa palavra que lhes retrato<br>
+        Sede de manifestações sociais engajada por nosso idioma<br><br>
+
+        Problemática... Sim, problemática...<br>
+        Antítica, analítica ao modo de se ver<br>
+        Mais um delírio confirmado de minha imaginação.<br>
+    </div>
+</div>
+
+
+
+<!-- Rodapé -->
+        <div class="footer">
+            &copy; 2025<br>Todos os direitos reservados.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("bookImage").onclick = function () {
+            let modal = document.getElementById("imageModal");
+            let modalImg = document.getElementById("modalImg");
+
+            modalImg.src = this.src; // Define a imagem dentro do modal
+            modal.classList.add("show");
+        };
+
+        document.getElementById("imageModal").onclick = function (event) {
+            if (event.target === this || event.target.classList.contains("close-modal")) {
+                this.classList.remove("show");
+                setTimeout(() => { this.style.display = "none"; }, 300);
+            }
+        };
+    </script>
+</body>
+</html>
