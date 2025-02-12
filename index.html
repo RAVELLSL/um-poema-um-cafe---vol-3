@@ -5,170 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(...um poema, um café...) volume 3</title>
     <style>
-        /* Importando a fonte 'Special Elite' do Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+       /* Importando a fonte 'Special Elite' do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-        /* Estilos gerais */
-        body {
-            font-family: 'Special Elite', 'Courier New', Courier, monospace;
-            background-color: #f9f9f9;
-            color: #333333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='20' height='20' fill='%23f9f9f9'/%3E%3Cpath d='M0 0L20 20M20 0L0 20' stroke='%23e0e0e0' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-        }
+/* Estilos gerais */
+body {
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    background-color: #f9f9f9;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='20' height='20' fill='%23f9f9f9'/%3E%3Cpath d='M0 0L20 20M20 0L0 20' stroke='%23e0e0e0' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+}
 
-        /* Container principal */
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 30px auto;
-            background-color: #ffffff;
-            padding: 25px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-        }
+/* Container principal */
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 25px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
 
-        /* Título principal */
-        .title {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 25px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
+/* Título principal */
+.title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
 
-        /* Capa do livro */
-        .book-cover {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+/* Capa do livro */
+.book-cover {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .book-cover img {
-            width: 250px; /* Aumento do tamanho da capa */
-            height: auto;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-in-out;
-            display: block;
-            margin: auto;
-        }
+.book-cover img {
+    width: 250px; /* Aumento do tamanho da capa */
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    display: block;
+    margin: auto;
+}
 
-        .book-cover img:hover {
-            transform: scale(1.08);
-        }
+.book-cover img:hover {
+    transform: scale(1.08);
+}
 
-        /* Modal para exibição da capa expandida */
-        .modal {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
+/* Modal para exibição da capa expandida */
+.modal {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
 
-        .modal.show {
-            opacity: 1;
-            display: flex;
-        }
+.modal.show {
+    opacity: 1;
+    display: flex;
+}
 
-        .modal-content {
-            width: auto;
-            height: auto;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-        }
+.modal-content {
+    width: auto;
+    height: auto;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
 
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-        }
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
 
-        /* Notas do autor */
-        .author-notes {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #ccc;
-        }
+/* Notas do autor */
+.author-notes {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #ccc;
+}
 
-        .author-notes-title {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+.author-notes-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-        .author-notes-content {
-            text-align: justify;
-            font-size: 1.1em;
-        }
+.author-notes-content {
+    text-align: justify;
+    font-size: 1.1em;
+}
 
-        /* Estilo dos poemas */
-        .poem {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 5px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-        }
+/* Estilo dos poemas */
+.poem {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .poem-title {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-transform: capitalize;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
+.poem-title {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
 
-        .poem-author {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            font-style: italic;
-            color: #555555;
-        }
+.poem-author {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-style: italic;
+    color: #555555;
+}
 
-        .poem-content {
-            white-space: pre-wrap;
-            line-height: 1.8;
-            text-align: justify;
-            font-size: 1.1em;
-            padding-left: 15px;
-            border-left: 3px solid #ccc;
-        }
+.poem-content {
+    white-space: pre-wrap;
+    line-height: 1.1; /* Espaçamento entre linhas ainda mais reduzido */
+    text-align: justify;
+    font-size: 1.1em;
+    padding-left: 15px;
+    border-left: 3px solid #ccc;
+}
 
-        /* Rodapé */
-        .footer {
-            text-align: center;
-            font-size: 0.9em;
-            color: #777777;
-            margin-top: 50px;
-            border-top: 1px solid #dddddd;
-            padding-top: 15px;
-            background-color: #f1f1f1;
-            padding: 10px;
-        }
+/* Rodapé */
+.footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #777777;
+    margin-top: 50px;
+    border-top: 1px solid #dddddd;
+    padding-top: 15px;
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+@media (max-width: 600px) {
+    /* Reset básico para telas menores */
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    
+    /* Container principal ocupa toda a largura com leves espaçamentos laterais */
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 0 10px;
+        box-sizing: border-box;
+        border: none;
+    }
+    
+    /* 
+      Não alteramos os estilos dos títulos (.title, .poem-title, .author-notes-title)
+      para que permaneçam com o estilo original definido fora desta media query.
+    */
+    
+    /* Container de cada poema */
+    .poem {
+        width: 100%;
+        margin: 0;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    
+    /* Conteúdo dos poemas: alinhado à esquerda com tipografia consistente */
+    .poem-content {
+        text-align: center;
+        font-size: 1.1em;  /* Tamanho da fonte dos poemas */
+        line-height: 1.1; /* Espaçamento entre linhas reduzido também em telas menores */
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        border-left: none;
+        padding-left: 0;
+    }
+    
+    /* Ajuste da capa do livro */
+    .book-cover img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    /* Formatação do rodapé */
+    .footer {
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 1.5rem;
+    }
+}
+
     </style>
 </head>
 <body>
